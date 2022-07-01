@@ -1,0 +1,19 @@
+node()
+{
+    stage("ContDownload")
+    {
+        git 'https://github.com/Akshay13Raut/banking.git'
+    }
+     stage("ContBuild")
+    {
+       sh 'mvn package'
+    }
+     stage("ContDeploy")
+    {
+        deploy adapters: [tomcat9(credentialsId: 'ad13061e-949b-49d1-9870-0921a04984c7', path: '', url: 'http://172.31.33.221:8080')], contextPath: 'application01', war: '**/*.war'
+    }
+}
+
+       
+    
+    
